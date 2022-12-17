@@ -1,0 +1,54 @@
+/**
+    @defgroup NMaxPreferences Preferences
+
+    @section NMaxPreferencesOverview Overview
+
+    Any changed values of <tt>nmaxtoolbox.ini</tt> file are saved again when 
+    the preferences dialog is closed.
+
+    @section NMaxPreferencesMeshSuffix Mesh Suffix
+
+    @image html meshsuffix01.png "Mesh Suffix rollout in the Preferences dialog"
+
+    A mesh suffix is a file name suffix which is appened to the exported mesh file name 
+    to make the mesh can be easily recognized by its type.
+    Currently the following mesh types are supported:
+
+      - <b>Static</b> Mesh Suffix - A default value is "".
+      - <b>Skinned</b> Mesh Suffix - A default value is "_skinned".
+      - <b>Static Shadow</b> Mesh Suffix - A default value is "_shadow".
+      - <b>Skinned Shadow</b> Mesh Suffix - A default value is "_skinnedshadow". 
+      - <b>Swing Mesh</b> Suffix - A default value is "_swing". 
+      - <b>Collision</b> Mesh Suffix - A default value is "_collision". 
+      - <b>Particle2</b> Mesh Suffix - A default value is "_particle2". 
+
+    All those mesh suffixes are saved in the plugin INI file(<tt>nmaxtoolbox.ini</tt>) and 
+    can be modified via @ref NMaxPreferences dialog.
+    See @ref NMaxPerMeshOptions page for more information about supported mesh types.
+
+    @section NMaxPreferencesViewerOptions Viewer Options
+
+    @image html vieweroptions01.png "Viewer Options rollout in the Preferences dialog"
+
+    @subsection NMaxPreferencesDefaultViewerOptions Default Viewer Options
+
+    For a default viewer, <tt>nviewer.exe</tt> is used.
+
+    <b>Preview in FullScreen Mode</b> <br>
+    The viewer runs on fullscreen mode.
+
+    <b>Always on Top</b> <br>
+    The viewer always stay on top.
+
+    <b>Window Position</b> <br>
+    Specifies x and y position of the viewer in screen coordination. 
+
+    <b>Window Size</b> <br>
+    Specifies width and height of the viewer.
+
+
+    @subsection NMaxPreferencesCustomViewerOptions Custom Viewer Options
+
+    Viewer options for user provided custom viewer options. (<i>Not available yet</i>.)
+
+*/

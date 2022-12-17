@@ -1,0 +1,10 @@
+#-------------------------------------------------------------------------------
+#  bldfiles/tools.bld
+#  (c) 2006 Nebula2 Community
+#-------------------------------------------------------------------------------
+beginmodule mangalore
+    setdir tools
+    setfiles {
+        mangalore
+    }
+endmodule

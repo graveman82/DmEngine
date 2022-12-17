@@ -1,0 +1,24 @@
+#-------------------------------------------------------------------------------
+#  bldfiles/mangaloretools.bld
+#  (c) 2006 Nebula2 Community
+#-------------------------------------------------------------------------------
+begintarget mviewer
+    settype exe
+    setmodules {
+        viewer
+        viewerapp
+    }
+    settargetdeps {
+        mangalore
+        mcegui
+    }
+endtarget
+#-------------------------------------------------------------------------------
+beginworkspace mangaloretools
+    settargets {
+        mviewer
+        mangalore
+    }
+    addtargetdef mviewer USE_MCEGUI
+    addtargetdef mangalore USE_MCEGUI
+endworkspace

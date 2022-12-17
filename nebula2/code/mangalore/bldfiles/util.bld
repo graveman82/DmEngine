@@ -1,0 +1,21 @@
+#-------------------------------------------------------------------------------
+#  bldfiles/util.bld
+#  (c) 2006 Nebula2 Community
+#-------------------------------------------------------------------------------
+beginmodule util
+    setdir util
+    setheaders {
+        celltreebuilder
+        cmdlineargs
+        physicsgfxutil
+        segmentedgfxutil
+        skinraycheckutil
+    }
+    setfiles {
+        celltreebuilder
+        cmdlineargs
+        physicsgfxutil
+        segmentedgfxutil
+        skinraycheckutil
+    }
+endmodule

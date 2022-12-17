@@ -1,0 +1,251 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 한국어 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+#ifdef _WIN32
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "1 TYPELIB ""nmaxenvelopecurve.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041203b5"
+        BEGIN
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "nmaxenvelopecurve.ocx"
+            VALUE "OriginalFilename", "nmaxenvelopecurve.ocx"
+            VALUE "ProductName", "nmaxcontrol"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x412, 949
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_NMAXENVELOPECURVE   BITMAP                  "nmaxenvelopecurveCtrl.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_NMAXENVELOPECURVE   "nmaxenvelopecurve Control"
+    IDS_NMAXENVELOPECURVE_PPG "nmaxenvelopecurve Property Page"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_NMAXENVELOPECURVE_PPG_CAPTION "일반"
+END
+
+#endif    // 한국어 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 영어(미국) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPPAGE_NMAXENVELOPECURVE DIALOG  0, 0, 250, 62
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LTEXT           "TODO: ? ?? ??? nmaxenvelopecurve Control? ??? ???? ???? ?????.",
+                    IDC_STATIC,7,25,229,16
+END
+
+IDD_ENVELOPE_CURVE DIALOGEX 0, 0, 206, 67
+STYLE DS_SETFONT | DS_SETFOREGROUND | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Selected Position",IDC_STATIC,1,2,55,8
+    EDITTEXT        IDC_EDIT_SELECTED_POS,65,0,36,12,ES_AUTOHSCROLL
+    LTEXT           "Selected Value",IDC_STATIC,1,14,48,8
+    EDITTEXT        IDC_EDIT_SELECTED_VALUE,65,12,36,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC_HOLDER,"Static",SS_BLACKFRAME | NOT 
+                    WS_VISIBLE,0,24,113,36
+    EDITTEXT        IDC_EDIT_FREQUENCY,163,26,36,12,ES_AUTOHSCROLL | 
+                    ES_WANTRETURN
+    LTEXT           "Amplitude",IDC_STATIC,130,41,32,8
+    LTEXT           "Function",IDC_STATIC,134,54,28,8
+    EDITTEXT        IDC_EDIT_AMPLITUDE,163,39,36,12,ES_AUTOHSCROLL
+    LTEXT           "Frequency",IDC_STATIC,127,28,35,8
+    LTEXT           "Min",IDC_STATIC,150,15,12,8
+    COMBOBOX        IDC_COMBO_FUNCTION,163,52,36,46,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_MAX,163,0,36,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MIN,163,13,36,12,ES_AUTOHSCROLL
+    LTEXT           "Max",IDC_STATIC,148,2,14,8
+END
+
+IDD_ENVELOPE_COLOR_CURVE DIALOGEX 0, 0, 206, 38
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Selected Position",IDC_STATIC,3,4,55,8
+    LTEXT           "Selected Color",IDC_STATIC,3,23,47,8
+    EDITTEXT        IDC_EDIT_SELECTED_POS,60,3,34,12,ES_AUTOHSCROLL
+    LTEXT           "Static",IDC_CONTROL_HOLDER,97,3,103,31,NOT WS_VISIBLE | 
+                    WS_BORDER
+    CONTROL         "Button3",IDC_BTN_SELECTED_COLOR,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,60,21,34,12
+END
+
+IDD_ENVELOPE_CURVE1 DIALOGEX 0, 0, 117, 66
+STYLE DS_SETFONT | DS_SETFOREGROUND | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Selected Position",-1,1,2,55,8
+    EDITTEXT        IDC_EDIT_SELECTED_POS,65,0,36,12,ES_AUTOHSCROLL
+    LTEXT           "Selected Value",-1,1,14,48,8
+    EDITTEXT        IDC_EDIT_SELECTED_VALUE,65,12,36,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC_HOLDER,"Static",SS_BLACKFRAME | NOT 
+                    WS_VISIBLE,0,24,113,38
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PROPPAGE_NMAXENVELOPECURVE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_ENVELOPE_CURVE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 205
+        BOTTOMMARGIN, 64
+    END
+
+    IDD_ENVELOPE_COLOR_CURVE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 204
+        BOTTOMMARGIN, 36
+    END
+
+    IDD_ENVELOPE_CURVE1, DIALOG
+    BEGIN
+        RIGHTMARGIN, 116
+        BOTTOMMARGIN, 63
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_ENVELOPE_CURVE DLGINIT
+BEGIN
+    IDC_COMBO_FUNCTION, 0x403, 5, 0
+0x6953, 0x656e, "\000" 
+    IDC_COMBO_FUNCTION, 0x403, 7, 0
+0x6f43, 0x6973, 0x656e, "\000" 
+    0
+END
+
+#endif    // 영어(미국) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "nmaxenvelopecurve.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
+
