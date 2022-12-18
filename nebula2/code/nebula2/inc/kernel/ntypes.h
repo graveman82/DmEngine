@@ -5,8 +5,16 @@
     Lowlevel Nebula defines.
 
     (C) 2002 RadonLabs GmbH
+
+        - 18-Dec-22     mrsung  added fixed size integer types;
+                                removed shortcuts for unsigneds;
+                                va_copy if less VC 2013;
+                                don't use NULL but in Win32API calls (so, it must be defined in windows.h etc)
+
+    Modifications: (C) 2001 Marat Sungatullin
 */
 #ifndef __XBxX__
+#include <cstdint>
 #include <errno.h>
 #include <stdio.h>
 #include <new>
@@ -16,11 +24,18 @@
 #include "kernel/ndebug.h"
 #include "kernel/ndefclass.h"
 
+// fixed size integer types
+typedef std::int8_t nInt8;
+typedef std::int16_t nInt16;
+typedef std::int32_t nInt32;
+typedef std::int64_t nInt64;
+
+typedef std::uint8_t nUInt8;
+typedef std::uint16_t nUInt16;
+typedef std::uint32_t nUInt32;
+typedef std::uint64_t nInt64;
+
 // Shortcut Typedefs
-typedef unsigned long  ulong;
-typedef unsigned int   uint;
-typedef unsigned short ushort;
-typedef unsigned char  uchar;
 typedef float float2[2];
 typedef float float3[3];
 typedef float float4[4];
@@ -64,9 +79,11 @@ struct nFloat2
 typedef unsigned int nFourCC;
 typedef double nTime;
 
-#ifndef NULL
-#define NULL (0L)
+#if _HAS_CXX17 == 0
+#error "This library needs at least a C++11 compliant compiler"
 #endif
+
+#define N_NULLHANDLE (0L)
 
 //------------------------------------------------------------------------------
 #define N_MAXPATH (512)     // maximum length for complete path
@@ -84,12 +101,12 @@ typedef double nTime;
 #define n_stricmp stricmp
 #endif
 
-#ifdef __WIN32__
+#ifdef N_OS_WIN32
 #define snprintf _snprintf
 #define vsnprintf _vsnprintf
 #endif
 
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && (_MSC_VER < 1800)
 #define va_copy(d, s) d = s
 #endif
 
@@ -100,10 +117,10 @@ typedef double nTime;
 #endif
 
 // maps unsigned 8 bits/channel to D3DCOLOR
-#define N_ARGB(a, r, g, b) ((uint)((((a)&0xff) << 24) | (((r)&0xff) << 16) | (((g)&0xff) << 8) | ((b)&0xff)))
+#define N_ARGB(a, r, g, b) ((nUInt32)((((a)&0xff) << 24) | (((r)&0xff) << 16) | (((g)&0xff) << 8) | ((b)&0xff)))
 #define N_RGBA(r, g, b, a) N_ARGB(a, r, g, b)
 #define N_XRGB(r, g, b)   N_ARGB(0xff, r, g, b)
-#define N_COLORVALUE(r, g, b, a) N_RGBA((uint)((r)*255.f), (uint)((g)*255.f), (uint)((b)*255.f), (uint)((a)*255.f))
+#define N_COLORVALUE(r, g, b, a) N_RGBA((nUInt32)((r)*255.f), (nUInt32)((g)*255.f), (nUInt32)((b)*255.f), (nUInt32)((a)*255.f))
 
 //------------------------------------------------------------------------------
 //  public kernel C functions

@@ -5,6 +5,10 @@
     Platform specific macros and defines.
 
     (C) 2002 RadonLabs GmbH
+
+            - 18-Dec-22     mrsung  OS Windows macro in Nebula code style.
+
+    Modifications: (C) 2001 Marat Sungatullin
 */
 #ifdef __XBxX__
     // temporarly disabled because of bugs in SSE math classes
@@ -32,6 +36,9 @@
 #endif
 
 #ifdef __WIN32__
+#   define N_OS_WIN
+#   define N_OS_WIN32
+
 #   ifndef WIN32_LEAN_AND_MEAN
 #   define WIN32_LEAN_AND_MEAN
 #   endif
