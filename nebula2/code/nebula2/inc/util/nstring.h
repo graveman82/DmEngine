@@ -121,7 +121,7 @@ public:
     /// append string
     void Append(const nString& str);
     /// append a range of characters
-    void AppendRange(const char* str, uint numChars);
+    void AppendRange(const char* str, nUInt32 numChars);
     /// append int value
     void AppendInt(int val);
     /// append float value
@@ -137,7 +137,7 @@ public:
     /// tokenized string into a provided nString array
     int Tokenize(const char* whiteSpace, nArray<nString>& tokens) const;
     /// tokenized string, keep strings within fence characters intact
-    int Tokenize(const char* whiteSpace, uchar fence, nArray<nString>& tokens) const;
+    int Tokenize(const char* whiteSpace, nUInt8 fence, nArray<nString>& tokens) const;
     /// extract substring
     nString ExtractRange(int from, int numChars) const;
     /// terminate string at first occurrence of character in set
@@ -232,9 +232,9 @@ protected:
         struct
         {
             char localString[LOCALSTRINGSIZE];
-            ushort localStrLen;
+            nUInt16 localStrLen;
         };
-        uint strLen;
+        nUInt32 strLen;
     };
 };
 
@@ -243,10 +243,10 @@ protected:
 */
 inline
 nString::nString() :
-    string(0),
-    strLen(0),
-    localStrLen(0)
+    string(0)
 {
+    strLen = 0;
+    localStrLen = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ nString::Set(const char* str, int length)
         {
             memcpy(this->localString, str, length);
             this->localString[length] = 0;
-            this->localStrLen = (ushort)length;
+            this->localStrLen = (nUInt16)length;
         }
     }
 }
@@ -409,10 +409,10 @@ nString::Copy(const nString& src)
 */
 inline
 nString::nString(const char* str) :
-    string(0),
-    strLen(0),
-    localStrLen(0)
+    string(0)
 {
+    strLen = 0;
+    localStrLen = 0;
     this->Set(str);
 }
 
@@ -480,13 +480,13 @@ nString::operator=(const char* rhs)
 */
 inline
 void
-nString::AppendRange(const char* str, uint numChars)
+nString::AppendRange(const char* str, nUInt32 numChars)
 {
     n_assert(str);
     if (numChars > 0)
     {
-        uint rlen = numChars;
-        uint tlen = this->Length() + rlen;
+        nUInt32 rlen = numChars;
+        nUInt32 tlen = this->Length() + rlen;
         if (this->string)
         {
             char* ptr = (char*)n_malloc(tlen + 1);
@@ -510,7 +510,7 @@ nString::AppendRange(const char* str, uint numChars)
             else
             {
                 strncat(this->localString, str, numChars);
-                this->localStrLen = (ushort)tlen;
+                this->localStrLen = (nUInt16)tlen;
             }
         }
         else
@@ -528,7 +528,7 @@ void
 nString::Append(const char* str)
 {
     n_assert(str);
-    uint rlen = strlen(str);
+    nUInt32 rlen = strlen(str);
     this->AppendRange(str, rlen);
 }
 
@@ -872,7 +872,7 @@ nString::Tokenize(const char* whiteSpace, nArray<nString>& tokens) const
 */
 inline
 int
-nString::Tokenize(const char* whiteSpace, uchar fence, nArray<nString>& tokens) const
+nString::Tokenize(const char* whiteSpace, nUInt8 fence, nArray<nString>& tokens) const
 {
     // create a temporary string, which will be destroyed during the operation
     nString str(*this);
@@ -1198,9 +1198,9 @@ inline
 void
 nString::UTF8toANSI()
 {
-    uchar* src = (uchar*)this->Get();
-    uchar* dst = src;
-    uchar c;
+    nUInt8* src = (nUInt8*)this->Get();
+    nUInt8* dst = src;
+    nUInt8 c;
     while ((c = *src++))
     {
         if (c >= 0x80)
@@ -1208,14 +1208,14 @@ nString::UTF8toANSI()
             if ((c & 0xE0) == 0xC0)
             {
                 // a 2 byte sequence with 11 bits of information
-                ushort wide = ((c & 0x1F) << 6) | (*src++ & 0x3F);
+                nUInt16 wide = ((c & 0x1F) << 6) | (*src++ & 0x3F);
                 if (wide > 0xff)
                 {
                     c = '?';
                 }
                 else
                 {
-                    c = (uchar) wide;
+                    c = (nUInt8) wide;
                 }
             }
             else if ((c & 0xF0) == 0xE0)

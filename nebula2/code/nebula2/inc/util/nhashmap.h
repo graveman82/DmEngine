@@ -28,11 +28,11 @@ public:
     /// destructor
     ~nHashMap();
     /// adds a string to the hash map, returns index of string
-    ushort AddString(const char* str);
+    nUInt16 AddString(const char* str);
     /// map string to 16 bit key
-    ushort operator[](const char* index);
+    nUInt16 operator[](const char* index);
     /// map 16 bit key to string
-    const nString& operator[](ushort key) const;
+    const nString& operator[](nUInt16 key) const;
     /// check if entry exists
     bool Exists(const char* index) const;
     /// access to dense array (can be indexed with 16 bit key)
@@ -51,7 +51,7 @@ private:
     void Rehash(int newSize);
 
     int rehashThreshold;
-    nFixedArray<nArray<ushort> >* hashTable;
+    nFixedArray<nArray<nUInt16> >* hashTable;
     nArray<nString> stringArray;
 };
 
@@ -63,7 +63,7 @@ nHashMap::nHashMap() :
     rehashThreshold(8),
     stringArray(128, 128)
 {
-    this->hashTable = n_new(nFixedArray<nArray<ushort> >(128));
+    this->hashTable = n_new(nFixedArray<nArray<nUInt16> >(128));
     this->stringArray.SetFlags(nArray<nString>::DoubleGrowSize);
 }
 
@@ -75,7 +75,7 @@ nHashMap::nHashMap(int s, int r) :
     rehashThreshold(r),
     stringArray(s, s)
 {
-    this->hashTable = n_new(nFixedArray<nArray<ushort> >(s));
+    this->hashTable = n_new(nFixedArray<nArray<nUInt16> >(s));
     this->stringArray.SetFlags(nArray<nString>::DoubleGrowSize);
 }
 
@@ -137,7 +137,7 @@ nHashMap::HashIndex(const char* str) const
     char c;
     while ((c = *str++))
     {
-        i += ((uchar)c) * j++;
+        i += ((nUInt8)c) * j++;
     }
     return (i % hashSize);
 }
@@ -152,20 +152,20 @@ nHashMap::Rehash(int newHashSize)
 {
     n_printf("nHashMap: rehashing to size %d\n", newHashSize);
 
-    nFixedArray<nArray<ushort> >* oldTable = this->hashTable;
+    nFixedArray<nArray<nUInt16> >* oldTable = this->hashTable;
     n_assert(oldTable);
-    this->hashTable = n_new(nFixedArray<nArray<ushort> >(newHashSize));
+    this->hashTable = n_new(nFixedArray<nArray<nUInt16> >(newHashSize));
 
     int oldTableIndex;
     int oldTableSize = oldTable->Size();
     for (oldTableIndex = 0; oldTableIndex < oldTableSize; oldTableIndex++)
     {
-        const nArray<ushort>& entryArray = (*oldTable)[oldTableIndex];
+        const nArray<nUInt16>& entryArray = (*oldTable)[oldTableIndex];
         int entryArraySize = entryArray.Size();
         int j;
         for (j = 0; j < entryArraySize; j++)
         {
-            ushort stringIndex = entryArray[j];
+            nUInt16 stringIndex = entryArray[j];
             int hashIndex = this->HashIndex(this->stringArray[stringIndex].Get());
             (*this->hashTable)[hashIndex].Append(stringIndex);
         }
@@ -175,17 +175,17 @@ nHashMap::Rehash(int newHashSize)
 
 //------------------------------------------------------------------------------
 /**
-    The [] operator which maps a string to ushort key.
+    The [] operator which maps a string to nUInt16 key.
 */
 inline
-ushort
+nUInt16
 nHashMap::operator[](const char* indexString)
 {
     n_assert(indexString);
 
     // compute hash index
     int hashIndex = this->HashIndex(indexString);
-    nArray<ushort>* entryArray = &((*this->hashTable)[hashIndex]);
+    nArray<nUInt16>* entryArray = &((*this->hashTable)[hashIndex]);
 
     // check for existing entry
     int i;
@@ -203,7 +203,7 @@ nHashMap::operator[](const char* indexString)
     // check if the string already exists, this involves string compares
     for (i = 0; i < num; i++)
     {
-        ushort stringIndex = (*entryArray)[i];
+        nUInt16 stringIndex = (*entryArray)[i];
         if (0 == strcmp(this->stringArray[stringIndex].Get(), indexString))
         {
             // yep exists
@@ -213,7 +213,7 @@ nHashMap::operator[](const char* indexString)
     // fallthrough: new string, add string to dense string array and
     // add new string index to hash table
     this->stringArray.Append(indexString);  // FIXME: calls hidden nString constructor!
-    ushort newStringIndex = this->stringArray.Size() - 1;
+    nUInt16 newStringIndex = this->stringArray.Size() - 1;
     (*this->hashTable)[hashIndex].Append(newStringIndex);
     return newStringIndex;
 }
@@ -224,7 +224,7 @@ nHashMap::operator[](const char* indexString)
     for the operator[] which takes a const char* as index.
 */
 inline
-ushort
+nUInt16
 nHashMap::AddString(const char* str)
 {
     return (*this)[str];
@@ -236,7 +236,7 @@ nHashMap::AddString(const char* str)
 */
 inline
 const nString&
-nHashMap::operator[](ushort key) const
+nHashMap::operator[](nUInt16 key) const
 {
     return this->stringArray[key];
 }
@@ -253,12 +253,12 @@ nHashMap::Exists(const char* indexString) const
 
     // compute hash index
     int hashIndex = this->HashIndex(indexString);
-    const nArray<ushort>& entryArray = (*this->hashTable)[hashIndex];
+    const nArray<nUInt16>& entryArray = (*this->hashTable)[hashIndex];
     int i;
     int num = entryArray.Size();
     for (i = 0; i < num; i++)
     {
-        ushort stringIndex = entryArray[i];
+        nUInt16 stringIndex = entryArray[i];
         if (0 == strcmp(this->stringArray[stringIndex].Get(), indexString))
         {
             // yep exists

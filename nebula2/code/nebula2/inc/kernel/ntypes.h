@@ -33,7 +33,7 @@ typedef std::int64_t nInt64;
 typedef std::uint8_t nUInt8;
 typedef std::uint16_t nUInt16;
 typedef std::uint32_t nUInt32;
-typedef std::uint64_t nInt64;
+typedef std::uint64_t nUInt64;
 
 // Shortcut Typedefs
 typedef float float2[2];
@@ -80,7 +80,7 @@ typedef unsigned int nFourCC;
 typedef double nTime;
 
 #if _HAS_CXX17 == 0
-#error "This library needs at least a C++11 compliant compiler"
+#error "This library needs at least a C++17 compliant compiler"
 #endif
 
 #define N_NULLHANDLE (0L)

@@ -32,9 +32,9 @@ public:
     /// return pointer to singleton instance
     static nAtomTable* Instance();
     /// convert a string into an index
-    ushort StringToKey(const char* str);
+    nUInt16 StringToKey(const char* str);
     /// convert an index into a string
-    const nString& KeyToString(ushort key) const;
+    const nString& KeyToString(nUInt16 key) const;
 
 private:
     static nAtomTable* Singleton;
@@ -57,7 +57,7 @@ nAtomTable::Instance()
     Map string to 16 bit key.
 */
 inline
-ushort
+nUInt16
 nAtomTable::StringToKey(const char* str)
 {
     return this->hashMap[str];
@@ -69,7 +69,7 @@ nAtomTable::StringToKey(const char* str)
 */
 inline
 const nString&
-nAtomTable::KeyToString(ushort key) const
+nAtomTable::KeyToString(nUInt16 key) const
 {
     return this->hashMap[key];
 }
