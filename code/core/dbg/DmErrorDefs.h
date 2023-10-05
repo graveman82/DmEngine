@@ -34,24 +34,24 @@ public:
 		kEC_Unk,
 		kEC_Ok,
 		kEC_InvalidArg,
-		kEC_NoMem,
+		kEC_NoMem
 
 	};
 	
 	enum ErrorSources
 	{
 		kES_Undefined,
-		kES_Container,
+		kES_Container
 	};
 
 	enum ErrorFlags
 	{
-		kEF_HasValuePtr = (1 << 0),
+		kEF_HasValuePtr = (1 << 0)
 	};
 
-	DmResult(DmUInt16 errorCode, DmUInt8 source = kES_Undefined, flags = 0U)
-		: m_errorCode(errorCode)
-		, m_source(source)
+	DmResult(ErrorCodes errorCode, ErrorSources source = kES_Undefined, DmUInt8 flags = 0U)
+		: m_errorCode((DmUInt16)errorCode)
+		, m_source((DmUInt8)source)
 		, m_flags(flags)
 	{
 	}
@@ -64,6 +64,6 @@ public:
 
 inline DmResult DmOkResult() { return DmResult(DmResult::kEC_Ok); }
 inline DmResult DmUnkError() { return DmResult(DmResult::kEC_Unk); }
-
-
+ 
+DM_API DmResult __cdecl DmAssertOut(const char* filename, DmUInt32 nLine, const char* msg = kDmNullPtr);
 #endif // DM_ERRORDEFS_H_INCL

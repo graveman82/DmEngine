@@ -21,51 +21,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#ifndef DM_PLATFORM_H_INCL
-#define DM_PLATFORM_H_INCL
 
-#ifdef _WIN32
-#	define  DM_WIN32
-#elif defined _LINUX
-#	define  DM_LINUX
-#else
-#	error "Unsupported Platform."
-#endif
+#include "stdafx.h"
+#include "core/dbg/DmErrorDefs.h"
 
-// Fixed size platform independent types to store integers.
-typedef signed char DmInt8;
-typedef short DmInt16;
-typedef int DmInt32;
+#include <stdio.h>
 
-typedef unsigned char DmUInt8;
-typedef unsigned short DmUInt16;
-typedef unsigned int DmUInt32;
-
-#define kDmNullPtr 0
-
-// Export and import specifiers
 #ifdef DM_WIN32
-
-#	define  DM_DLL_EXPORT	__declspec( dllexport ) 
-#	define  DM_DLL_IMPORT	__declspec( dllimport )
-
-#elif defined DM_LINUX
-
-#	define  DM_DLL_EXPORT
-#	define  DM_DLL_IMPORT
-
-#else
-#	error "Unsupported Platform."
+#	include <windows.h>
 #endif
 
-#ifdef DM_RND_EXE
-#	define DM_API
-#else
-#	ifdef DM_EXPORTS
-#		define DM_API DM_DLL_EXPORT
-#	else
-#		define DM_API DM_DLL_IMPORT
-#	endif
-#endif // DM_RND
-
-#endif // DM_PLATFORM_H_INCL
+DM_API DmResult __cdecl DmAssertOut(const char* filename, DmUInt32 nLine, const char* msg)
+{
+	char buf[1024] = {0};
+	sprintf(buf, "%s", msg);
+#ifdef DM_WIN32
+	::MessageBoxA((HWND)kDmNullPtr, buf, "DM Error", MB_OK | MB_TOPMOST | MB_ICONERROR);
+#endif
+	return DmOkResult();
+}
