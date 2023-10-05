@@ -21,17 +21,49 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#ifndef DM_PLATFORM_H_INCL
-#define DM_PLATFORM_H_INCL
+#ifndef DM_ERRORDEFS_H_INCL
+#define DM_ERRORDEFS_H_INCL
 
-// Fixed size platform independent types to store integers.
-typedef signed char DmInt8;
-typedef short DmInt16;
-typedef int DmInt32;
+#include "platform/DmPlatform.h"
 
-typedef unsigned char DmUInt8;
-typedef unsigned short DmUInt16;
-typedef unsigned int DmUInt32;
+class DmResult
+{
+public:
+	enum ErrorCodes
+	{
+		kEC_Unk,
+		kEC_Ok,
+		kEC_InvalidArg,
+		kEC_NoMem,
 
-#define kDmNullPtr 0
-#endif // DM_PLATFORM_H_INCL
+	};
+	
+	enum ErrorSources
+	{
+		kES_Undefined,
+		kES_Container,
+	};
+
+	enum ErrorFlags
+	{
+		kEF_HasValuePtr = (1 << 0),
+	};
+
+	DmResult(DmUInt16 errorCode, DmUInt8 source = kES_Undefined, flags = 0U)
+		: m_errorCode(errorCode)
+		, m_source(source)
+		, m_flags(flags)
+	{
+	}
+
+	
+	DmUInt16 m_errorCode;
+	DmUInt8 m_source;
+	DmUInt8 m_flags;
+};
+
+inline DmResult DmOkResult() { return DmResult(DmResult::kEC_Ok); }
+inline DmResult DmUnkError() { return DmResult(DmResult::kEC_Unk); }
+
+
+#endif // DM_ERRORDEFS_H_INCL
